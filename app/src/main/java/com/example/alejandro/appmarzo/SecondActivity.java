@@ -62,7 +62,7 @@ public class SecondActivity extends AppCompatActivity {
 
 
         HttpAsyncTask httpAsyncTask = new HttpAsyncTask();
-        httpAsyncTask.execute("http://google.com");
+        httpAsyncTask.execute("https://i.stack.imgur.com/sB4kI.png");
 
 
 
