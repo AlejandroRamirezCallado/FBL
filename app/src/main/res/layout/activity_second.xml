@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.alejandro.appmarzo.SecondActivity">
-
+<!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,8 +25,22 @@
             android:orientation="vertical"
             ></LinearLayout>
     </LinearLayout>
+    -->
 
-   <!-- <fragment
+    <fragment
+        android:id="@+id/fragmentMapa"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentListaCoches"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragmentListaCoches" />
+
+    <fragment
     android:id="@+id/fragmentListaMensajes"
     android:name="com.example.milib.ListaFragment"
     android:layout_width="match_parent"
@@ -53,7 +67,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    -->
+
+
 
 
 </android.support.constraint.ConstraintLayout>

@@ -11,6 +11,7 @@ import com.example.alejandro.appmarzo.Adapters.ListaMensajesAdapters;
 import com.example.alejandro.appmarzo.FBObject.FBCoche;
 import com.example.alejandro.appmarzo.FBObject.Mensaje;
 import com.example.milib.ListaFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.GenericTypeIndicator;
 
@@ -20,7 +21,9 @@ import java.util.Map;
 public class SecondActivity extends AppCompatActivity {
 
     ListaFragment listaFragmentMensajes, listaFragmentCoches;
-    LinearLayout llcontainer;
+   // LinearLayout llcontainer;
+
+   // SupportMapFragment mapFragment;
 
 
     @Override
@@ -31,18 +34,26 @@ public class SecondActivity extends AppCompatActivity {
         SecondActivityEvents events = new SecondActivityEvents(this);
         DataHolder.instance.fireBaseAdmin.setListener(events);
 
-        //listaFragmentMensajes =(ListaFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentListaMensajes);
-        //listaFragmentCoches =(ListaFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentListaCoches);
+        listaFragmentMensajes =(ListaFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentListaMensajes);
+        listaFragmentCoches =(ListaFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentListaCoches);
 
-        llcontainer = this.findViewById(R.id.llcontainer);
 
-        listaFragmentMensajes = new ListaFragment();
-        listaFragmentCoches = new ListaFragment();
+         //mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentMapa);
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.llcontainer1,listaFragmentMensajes, "lfmensajes");
-        transaction.add(R.id.llcontainer2, listaFragmentCoches, "lfcoches");
-        transaction.commit();
+        //llcontainer = this.findViewById(R.id.llcontainer);
+
+        //listaFragmentMensajes = new ListaFragment();
+        //listaFragmentCoches = new ListaFragment();
+
+        //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        //transaction.add(R.id.llcontainer1,listaFragmentMensajes, "lfmensajes");
+        //transaction.add(R.id.llcontainer2, listaFragmentCoches, "lfcoches");
+
+        //transaction.hide(mapFragment);
+
+       // transaction.hide(listaFragmentMensajes);
+        //transaction.show(listaFragmentCoches);
+        //transaction.commit();
 
 
         DataHolder.instance.fireBaseAdmin.descargarYObservarRama("messages");
@@ -65,6 +76,7 @@ class SecondActivityEvents implements FireBaseAdminListener{
     @Override
     public void fireBaseAdmin_RamaDescargargada(String rama, DataSnapshot dataSnapshot) {
         Log.v("SecondActivity", rama + "----" + dataSnapshot);
+
         if(rama.equals("messages")){
             GenericTypeIndicator<Map<String, Mensaje>> indicator = new GenericTypeIndicator<Map<String, Mensaje>>(){};
             Map<String, Mensaje> msgs = dataSnapshot.getValue(indicator);
