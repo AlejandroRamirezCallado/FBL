@@ -2,20 +2,21 @@ package com.example.alejandro.appmarzo.FBObject;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.HashMap;
+
 /**
  * Created by alejandro on 26/2/18.
  */
 
 @IgnoreExtraProperties
-public class Mensaje {
+public class Mensajes {
+    public HashMap<String, Mensaje> msgs;
 
-    public String original;
-
-    public Mensaje(){
+    public Mensajes(){
 
     }
 
-    public Mensaje(String original){
-        this.original=original;
+    public Mensajes(HashMap<String, Mensaje> msgs){
+        this.msgs=msgs;
     }
 }
