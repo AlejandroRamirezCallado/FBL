@@ -15,7 +15,7 @@ import java.net.URLConnection;
  * Created by alejandro on 26/2/18.
  */
 
-public class HttpAsyncTask extends AsyncTask<String, Integer, String> {
+public class HttpAsyncTask extends AsyncTask<String, Integer, String[]> {
 
     public HttpAsyncTask(){
 
@@ -32,55 +32,62 @@ public class HttpAsyncTask extends AsyncTask<String, Integer, String> {
 
 
     @Override
-    protected String doInBackground(String... urls) {
+    protected String[] doInBackground(String... urls) {
         int count;
-        String pathfin = null;
-        Log.v("HttpAsyncTask","DEFINIMOS VARIABLES PREVIAS");
+        String pathfin[] = new String[urls.length];
+        this.publishProgress(0);
 
-        try {
-            String root = Environment.getExternalStorageDirectory().toString();
+        for (int i = 0; i < urls.length; i++){
+            try {
+                String root = Environment.getExternalStorageDirectory().toString();
 
-            Log.v("HttpAsyncTask", "downloadnig");
-            URL url = new URL(urls[0]);
+                Log.v("HttpAsyncTask", "downloadnig");
+                URL url = new URL(urls[0]);
 
-            URLConnection conection = url.openConnection();
-            conection.connect();
-            // getting file length
-            int lenghtOfFile = conection.getContentLength();
+                URLConnection conection = url.openConnection();
+                conection.connect();
+                // getting file length
+                int lenghtOfFile = conection.getContentLength();
 
-            // input stream to read file - with 8k buffer
-            InputStream input = new BufferedInputStream(url.openStream(), 8192);
+                // input stream to read file - with 8k buffer
+                InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
-            // Output stream to write file
+                // Output stream to write file
 
-            pathfin = root+"/downloadedfile.jpg";
 
-            OutputStream output = new FileOutputStream(pathfin);
-            byte data[] = new byte[1024];
 
-            int contador=0;
+                pathfin[i] = root+"/downloadedfile" + i + ".jpg";
 
-            long total = 0;
-            while ((count = input.read(data)) != -1) {
-                total += count;
-                contador =contador+ 5;
-                this.publishProgress(contador);
+                OutputStream output = new FileOutputStream(pathfin[i]);
+                byte data[] = new byte[1024];
 
-                // writing data to file
-                output.write(data, 0, count);
 
+                long total = 0;
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+
+
+                    // writing data to file
+                    output.write(data, 0, count);
+
+                }
+
+                // flushing output
+                output.flush();
+
+                // closing streams
+                output.close();
+                input.close();
+
+            } catch (Exception e) {
+                Log.e("Error: ", e.getMessage());
             }
+           // double temp = 100*((i+1)/urls.length);
 
-            // flushing output
-            output.flush();
-
-            // closing streams
-            output.close();
-            input.close();
-
-        } catch (Exception e) {
-            Log.e("Error: ", e.getMessage());
+            this.publishProgress(20*(i+1));
         }
+        this.publishProgress(100);
+
 
         return pathfin;
 
@@ -95,10 +102,11 @@ public class HttpAsyncTask extends AsyncTask<String, Integer, String> {
     }
 
     @Override
-    protected void onPostExecute(String in) {
+    protected void onPostExecute(String[] in) {
         super.onPostExecute(in);
-        Log.v("HttpAsyncTask", "SE TERMINO LA TAREA" + in);
+        Log.v("HttpAsyncTask", "SE TERMINO LA TAREA" + in[0] + "  " + in[1]);
 
 
     }
+
 }
