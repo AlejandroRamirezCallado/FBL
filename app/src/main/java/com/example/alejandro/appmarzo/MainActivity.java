@@ -13,6 +13,7 @@ import com.example.milib.LoginFragment;
 import com.example.milib.LoginFragmentListener;
 import com.example.milib.RegisterFragment;
 import com.example.milib.RegisterFragmentListener;
+import com.google.firebase.database.DataSnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -106,5 +107,10 @@ class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListe
         else {
 
         }
+    }
+
+    @Override
+    public void fireBaseAdmin_RamaDescargargada(String rama, DataSnapshot dataSnapshot) {
+
     }
 }

@@ -85,7 +85,7 @@ public class FireBaseAdmin {
                 });
     }
 
-    public void descargarYObservarRama(final String rama, Activity activity){
+    public void descargarYObservarRama(final String rama){
         // Read from the database
         DatabaseReference refRama = myRefRaiz.child(rama);
 
