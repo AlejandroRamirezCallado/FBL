@@ -15,12 +15,12 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListaMensajesFragment extends Fragment {
+public class ListaFragment extends Fragment {
 
     public RecyclerView recyclerView;
 
 
-    public ListaMensajesFragment() {
+    public ListaFragment() {
         // Required empty public constructor
     }
 
