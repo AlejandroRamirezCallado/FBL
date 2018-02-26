@@ -10,6 +10,7 @@ import com.example.alejandro.appmarzo.Adapters.ListaCochesAdapter;
 import com.example.alejandro.appmarzo.Adapters.ListaMensajesAdapters;
 import com.example.alejandro.appmarzo.FBObject.FBCoche;
 import com.example.alejandro.appmarzo.FBObject.Mensaje;
+import com.example.milib.AsyncTasks.HttpAsyncTask;
 import com.example.milib.ListaFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.firebase.database.DataSnapshot;
@@ -58,6 +59,10 @@ public class SecondActivity extends AppCompatActivity {
 
         DataHolder.instance.fireBaseAdmin.descargarYObservarRama("messages");
         DataHolder.instance.fireBaseAdmin.descargarYObservarRama("Coches");
+
+
+        HttpAsyncTask httpAsyncTask = new HttpAsyncTask();
+        httpAsyncTask.execute("http://google.com");
 
 
 
