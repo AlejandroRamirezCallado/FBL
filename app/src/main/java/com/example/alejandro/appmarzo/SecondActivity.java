@@ -4,8 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.alejandro.appmarzo.Adapters.ListaMensajesAdapters;
 import com.example.milib.ListaMensajesFragment;
 import com.google.firebase.database.DataSnapshot;
+
+import java.util.ArrayList;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -25,7 +28,17 @@ public class SecondActivity extends AppCompatActivity {
 
         //Log.v("SECONDACTIVITY", "------Email del usuario: " + DataHolder.instance.fireBaseAdmin.user.getEmail());
 
+       /* ArrayList<String> mdatos = new ArrayList<>();
+        mdatos.add("Mensaje 1");
+        mdatos.add("Mensaje 2");
+        mdatos.add("Mensaje 3");
+        mdatos.add("Mensaje 4");
 
+
+        ListaMensajesAdapters listaMensajesAdapters = new ListaMensajesAdapters(mdatos);
+
+        listaMensajesFragment.recyclerView.setAdapter(listaMensajesAdapters);
+        */
 
     }
 }
