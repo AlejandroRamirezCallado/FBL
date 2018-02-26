@@ -1,8 +1,10 @@
 package com.example.alejandro.appmarzo;
 
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.example.alejandro.appmarzo.Adapters.ListaCochesAdapter;
 import com.example.alejandro.appmarzo.Adapters.ListaMensajesAdapters;
@@ -18,6 +20,7 @@ import java.util.Map;
 public class SecondActivity extends AppCompatActivity {
 
     ListaFragment listaFragmentMensajes, listaFragmentCoches;
+    LinearLayout llcontainer;
 
 
     @Override
@@ -28,8 +31,19 @@ public class SecondActivity extends AppCompatActivity {
         SecondActivityEvents events = new SecondActivityEvents(this);
         DataHolder.instance.fireBaseAdmin.setListener(events);
 
-        listaFragmentMensajes =(ListaFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentListaMensajes);
-        listaFragmentCoches =(ListaFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentListaCoches);
+        //listaFragmentMensajes =(ListaFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentListaMensajes);
+        //listaFragmentCoches =(ListaFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentListaCoches);
+
+        llcontainer = this.findViewById(R.id.llcontainer);
+
+        listaFragmentMensajes = new ListaFragment();
+        listaFragmentCoches = new ListaFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.llcontainer1,listaFragmentMensajes, "lfmensajes");
+        transaction.add(R.id.llcontainer2, listaFragmentCoches, "lfcoches");
+        transaction.commit();
+
 
         DataHolder.instance.fireBaseAdmin.descargarYObservarRama("messages");
         DataHolder.instance.fireBaseAdmin.descargarYObservarRama("Coches");
@@ -59,6 +73,12 @@ class SecondActivityEvents implements FireBaseAdminListener{
             Log.v("SecondActivity", "MENSAJES CONTIENE: " + msgs.values());
             ListaMensajesAdapters listaMensajesAdapters = new ListaMensajesAdapters(new ArrayList<Mensaje>(msgs.values()));
             secondActivity.listaFragmentMensajes.recyclerView.setAdapter(listaMensajesAdapters);
+
+
+            FragmentTransaction transaction = secondActivity.getSupportFragmentManager().beginTransaction();
+            transaction.remove(secondActivity.listaFragmentMensajes);
+            transaction.commit();
+
 
         }
         else if(rama.equals("Coches")){

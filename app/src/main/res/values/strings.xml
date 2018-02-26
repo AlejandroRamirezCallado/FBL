@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AppMarzo</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

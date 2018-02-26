@@ -18,10 +18,17 @@ import java.util.ArrayList;
 public class ListaFragment extends Fragment {
 
     public RecyclerView recyclerView;
+    private static  ListaFragment instance;
 
 
     public ListaFragment() {
         // Required empty public constructor
+    }
+
+    public static ListaFragment getInstance(){
+        if(instance==null) instance=new ListaFragment();
+            return instance;
+
     }
 
 
